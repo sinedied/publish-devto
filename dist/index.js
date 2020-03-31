@@ -3270,7 +3270,8 @@ const { exec } = __webpack_require__(986);
 const { convertPathToPosix } = __webpack_require__(345);
 
 const commitTitle = `Update published articles`;
-const commitAuthor = `dev.to bot <sinedied+devtobot@gmail.com>`;
+const commitName = `dev.to bot`;
+const commitEmail = `sinedied+devtobot@gmail.com`;
 const git = (command, args) => exec('git', [command, ...args]);
 
 const getRepositoryUrl = (repository, githubToken) =>
@@ -3293,7 +3294,14 @@ async function commitAndPushUpdatedArticles(
     commitMessage += `\n\n- ${files
       .map(f => convertPathToPosix(f))
       .join('\n- ')}`;
-    await git('commit', ['--author', commitAuthor, '-m', commitMessage]);
+    await git('commit', [
+      '-c',
+      `user.name="${commitName}"`,
+      '-c',
+      `user.email="${commitEmail}"`,
+      '-m',
+      commitMessage
+    ]);
 
     await git('push', [
       getRepositoryUrl(repository, githubToken),
