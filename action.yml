@@ -6,7 +6,7 @@ branding:
   color: 'gray-dark'
 runs:
   using: 'node12'
-  main: 'index.js'
+  main: 'dist/index.js'
 inputs:
   devto_key:
     description: 'Your dev.to personal API key to publish and update articles'
