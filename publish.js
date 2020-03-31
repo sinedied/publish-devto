@@ -38,7 +38,7 @@ async function publishArticles(options) {
       articles,
       repository,
       options.githubToken,
-      options.conventional
+      options.useConventionalCommits
     );
   } catch (error) {
     console.error(chalk`Error: ${error.message}`);
