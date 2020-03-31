@@ -5,3 +5,5 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 > GitHub Action to publish markdown files on [dev.to](https://dev.to) platform, with assets hosted on GitHub.
+
+See [this example repository](https://github.com/sinedied/publish-devto-template) for usage and setup.
