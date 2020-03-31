@@ -17,7 +17,7 @@ inputs:
   files:
     description: 'One or more glob patterns of files to include'
     required: false
-    default: '**/*.md'
+    default: 'posts/**/*.md'
   conventional_commits:
     description: 'Use conventional commits messages'
     required: false
