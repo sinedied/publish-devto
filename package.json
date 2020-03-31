@@ -1,17 +1,18 @@
 {
-  "name": "devto-action",
+  "name": "publish-devto",
   "version": "1.0.0",
   "description": "GitHub Action to publish markdown files on dev.to platform, with assets hosted on GitHub.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sinedied/devto-action.git"
+    "url": "https://github.com/sinedied/publish-devto.git"
   },
+  "private": true,
   "main": "dist/index.js",
   "scripts": {
     "lint": "xo",
     "lint:fix": "xo --fix",
     "build": "ncc build index.js",
-    "test": "xo && jest",
+    "test": "xo",
     "postpublish": "git tag -a $npm_package_version -m \"$npm_package_version\" && git push --tags"
   },
   "keywords": [
@@ -28,9 +29,9 @@
     "name": "Yohan Lasorsa",
     "url": "https://twitter.com/sinedied"
   },
-  "homepage": "https://github.com/sinedied/devto-action",
+  "homepage": "https://github.com/sinedied/publish-devto",
   "bugs": {
-    "url": "https://github.com/sinedied/devto-action/issues"
+    "url": "https://github.com/sinedied/publish-devto/issues"
   },
   "license": "MIT",
   "dependencies": {
