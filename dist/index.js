@@ -3293,7 +3293,7 @@ async function commitAndPushUpdatedArticles(
     commitMessage += `\n\n- ${files
       .map(f => convertPathToPosix(f))
       .join('\n- ')}`;
-    await git('commit', ['-m', commitMessage, '--author', commitAuthor]);
+    await git('commit', ['--author', $commitAuthor, '-m', commitMessage]);
 
     await git('push', [
       getRepositoryUrl(repository, githubToken),
