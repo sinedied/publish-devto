@@ -1,0 +1,24 @@
+name: 'Dev.to'
+description: 'Publish markdown files to dev.to platform, using assets hosted on GitHub.'
+author: 'sinedied'
+branding:
+  icon: 'upload'
+  color: 'gray-dark'
+runs:
+  using: 'node12'
+  main: 'index.js'
+inputs:
+  devto_key:
+    description: 'Your dev.to personal API key to publish and update articles'
+    required: true
+  github_token:
+    description: 'Your GitHub access token to update files with ID once published'
+    required: true
+  files:
+    description: 'One or more glob patterns of files to include'
+    required: false
+    default: '**/*.md'
+  conventional_commits:
+    description: 'Use conventional commits messages'
+    required: false
+    default: false

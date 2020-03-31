@@ -1,0 +1,7 @@
+node_modules/
+.vscode/
+*.log
+coverage/
+*.tgz
+.DS_Store
+Thumbs.db

@@ -1,0 +1,88 @@
+{
+  "name": "devto-action",
+  "version": "1.0.0",
+  "description": "GitHub Action to publish markdown files on dev.to platform, with assets hosted on GitHub.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sinedied/devto-action.git"
+  },
+  "main": "dist/index.js",
+  "scripts": {
+    "lint": "xo",
+    "lint:fix": "xo --fix",
+    "build": "ncc build index.js",
+    "test": "xo && jest",
+    "postpublish": "git tag -a $npm_package_version -m \"$npm_package_version\" && git push --tags"
+  },
+  "keywords": [
+    "github",
+    "actions",
+    "dev.to",
+    "publish",
+    "markdown",
+    "assets",
+    "articles",
+    "sync"
+  ],
+  "author": {
+    "name": "Yohan Lasorsa",
+    "url": "https://twitter.com/sinedied"
+  },
+  "homepage": "https://github.com/sinedied/devto-action",
+  "bugs": {
+    "url": "https://github.com/sinedied/devto-action/issues"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.2.3",
+    "@actions/exec": "^1.0.3",
+    "chalk": "^3.0.0",
+    "fs-extra": "^9.0.0",
+    "globby": "^11.0.0",
+    "got": "^10.7.0",
+    "gray-matter": "^4.0.2"
+  },
+  "devDependencies": {
+    "@zeit/ncc": "^0.22.0",
+    "jest": "^25.2.4",
+    "xo": "^0.28.1"
+  },
+  "xo": {
+    "space": true,
+    "prettier": true,
+    "envs": [
+      "node",
+      "jest"
+    ],
+    "rules": {
+      "camelcase": [
+        "error",
+        {
+          "allow": [
+            "body_markdown",
+            "cover_image",
+            "published_at"
+          ]
+        }
+      ]
+    },
+    "ignores": [
+      "test/mocks/**/*"
+    ]
+  },
+  "prettier": {
+    "bracketSpacing": true
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "*.js",
+      "lib/**/*.js"
+    ],
+    "silent": true,
+    "verbose": true
+  },
+  "engines": {
+    "node": ">=12.0.0",
+    "npm": ">=6.0.0"
+  }
+}
