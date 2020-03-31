@@ -3267,7 +3267,7 @@ module.exports = require("child_process");
 /***/ (function(module, __unusedexports, __webpack_require__) {
 
 const { exec } = __webpack_require__(986);
-const { convertPathToPosix } = __webpack_require__(345);
+// const { convertPathToPosix } = require('./util');
 
 const commitTitle = `Update published articles`;
 const commitName = `dev.to bot`;
@@ -3286,19 +3286,20 @@ async function commitAndPushUpdatedArticles(
 ) {
   try {
     // TODO: check if master branch
-    const files = articles.map(a => `"${a.file}"`);
+    const files = articles.map(a => a.file);
     await git('add', files);
 
     let commitMessage = conventional
       ? `chore: ${commitTitle.toLowerCase()}`
       : commitTitle;
-    commitMessage += ` [skip ci]\n`;
-    commitMessage += `\n- ${files
-      .map(f => convertPathToPosix(f))
-      .join('\n- ')}`;
+    commitMessage += ` [skip ci]`;
+    // TODO: make it work
+    // commitMessage += `\n\n- ${files
+    //   .map(f => convertPathToPosix(f))
+    //   .join('\n- ')}`;
     await git(
       'commit',
-      ['-m', `"${commitMessage}"`],
+      ['-m', commitMessage],
       ['-c', `user.name="${commitName}"`, '-c', `user.email="${commitEmail}"`]
     );
 
