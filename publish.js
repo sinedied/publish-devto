@@ -15,6 +15,7 @@ async function publishArticles(options) {
 
     console.log(chalk`Found {green ${articles.length}} article(s)`);
 
+    // TODO: throttle
     await Promise.all(
       articles.map(async article => {
         const newArticle = prepareArticleForDevto(article, repository);
@@ -29,12 +30,6 @@ async function publishArticles(options) {
         await updateLocalArticle(article, result);
 
         // TODO: log results
-        await commitAndPushUpdatedArticles(
-          articles,
-          repository,
-          options.githubToken,
-          options.conventional
-        );
       })
     );
 
