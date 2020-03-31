@@ -2523,7 +2523,6 @@ async function run() {
     core.setSecret(githubToken);
     core.debug(JSON.stringify({ filesGlob, devtoKey, githubToken, useConventionalCommits}));
 
-    core.info('Publishing articles publication on dev.to, please wait…');
     await publishArticles({
       filesGlob,
       devtoKey,
@@ -2531,7 +2530,7 @@ async function run() {
       useConventionalCommits
     });
   } catch (error) {
-    core.setFailed(error && error.toString());
+    core.setFailed(error.toString());
   }
 }
 
@@ -16510,7 +16509,8 @@ async function publishArticles(options) {
     const repository = await getRepositoryFromPackage();
     const articles = await getArticlesFromFiles(options.filesGlob);
 
-    console.log(chalk`Found {green ${articles.length}} article(s)`);
+    console.info(chalk`Found {green ${articles.length}} article(s)`);
+    console.info('Publishing articles publication on dev.to, please wait…');
 
     // TODO: throttle
     await Promise.all(

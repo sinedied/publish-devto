@@ -13,7 +13,8 @@ async function publishArticles(options) {
     const repository = await getRepositoryFromPackage();
     const articles = await getArticlesFromFiles(options.filesGlob);
 
-    console.log(chalk`Found {green ${articles.length}} article(s)`);
+    console.info(chalk`Found {green ${articles.length}} article(s)`);
+    console.info('Publishing articles publication on dev.to, please wait…');
 
     // TODO: throttle
     await Promise.all(

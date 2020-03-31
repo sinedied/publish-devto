@@ -11,7 +11,6 @@ async function run() {
     core.setSecret(githubToken);
     core.debug(JSON.stringify({ filesGlob, devtoKey, githubToken, useConventionalCommits}));
 
-    core.info('Publishing articles publication on dev.to, please wait…');
     await publishArticles({
       filesGlob,
       devtoKey,
@@ -19,7 +18,7 @@ async function run() {
       useConventionalCommits
     });
   } catch (error) {
-    core.setFailed(error && error.toString());
+    core.setFailed(error.toString());
   }
 }
 
