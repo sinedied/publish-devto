@@ -3267,7 +3267,7 @@ module.exports = require("child_process");
 /***/ (function(module, __unusedexports, __webpack_require__) {
 
 const { exec } = __webpack_require__(986);
-// const { convertPathToPosix } = require('./util');
+// Const { convertPathToPosix } = require('./util');
 
 const commitTitle = `Update published articles`;
 const commitName = `dev.to bot`;
