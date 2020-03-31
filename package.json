@@ -13,7 +13,7 @@
     "lint:fix": "xo --fix",
     "build": "ncc build index.js",
     "test": "xo",
-    "tag": "git tag -d v1 && git push --delete origin v1 && git tag -a v1 -m 'v1' && git push tags"
+    "tag": "git tag -d v1 && git push --delete origin v1 && git tag -a v1 -m 'v1' && git push --tags"
   },
   "keywords": [
     "github",

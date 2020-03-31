@@ -2521,8 +2521,9 @@ async function run() {
     const useConventionalCommits = core.getInput('conventional_commits');
     core.setSecret(devtoKey);
     core.setSecret(githubToken);
+    core.debug({ filesGlob, devtoKey, githubToken, useConventionalCommits});
 
-    core.log('Publishing articles publication on dev.to, please wait…');
+    core.info('Publishing articles publication on dev.to, please wait…');
     await publishArticles({
       filesGlob,
       devtoKey,
