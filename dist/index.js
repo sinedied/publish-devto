@@ -16528,6 +16528,8 @@ async function publishArticles(options) {
     console.info(chalk`Found {green ${articles.length}} article(s)`);
     console.info('Publishing articles on dev.to, please wait…');
 
+    let shouldCommit = false;
+
     // TODO: throttle
     await Promise.all(
       articles.map(async article => {
@@ -16540,18 +16542,20 @@ async function publishArticles(options) {
 
         // TODO: set status, try/catch here
 
-        await updateLocalArticle(article, result);
-
+        const localArticle = await updateLocalArticle(article, result);
+        shouldCommit |= localArticle.hasChanged;
         // TODO: log results
       })
     );
 
-    await commitAndPushUpdatedArticles(
-      articles,
-      repository,
-      options.githubToken,
-      options.useConventionalCommits
-    );
+    if (shouldCommit) {
+      await commitAndPushUpdatedArticles(
+        articles,
+        repository,
+        options.githubToken,
+        options.useConventionalCommits
+      );
+    }
   } catch (error) {
     console.error(chalk`Error: ${error.message}`);
     throw new Error(`Publish failed`);
@@ -21836,7 +21840,7 @@ async function updateLocalArticle(article, remoteData) {
     await saveArticleToFile(newArticle);
   }
 
-  return newArticle;
+  return { ...newArticle, hasChanged };
 }
 
 module.exports = {
