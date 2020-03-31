@@ -2531,7 +2531,7 @@ async function run() {
       useConventionalCommits
     });
   } catch (error) {
-    core.setFailed(error.message);
+    core.setFailed(error && error.toString());
   }
 }
 
@@ -16538,6 +16538,7 @@ async function publishArticles(options) {
     );
   } catch (error) {
     console.error(chalk`Error: ${error.message}`);
+    throw new Error(`Publish failed`);
   }
 }
 

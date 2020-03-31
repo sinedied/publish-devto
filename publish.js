@@ -41,6 +41,7 @@ async function publishArticles(options) {
     );
   } catch (error) {
     console.error(chalk`Error: ${error.message}`);
+    throw new Error(`Publish failed`);
   }
 }
 

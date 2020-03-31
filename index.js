@@ -19,7 +19,7 @@ async function run() {
       useConventionalCommits
     });
   } catch (error) {
-    core.setFailed(error.message);
+    core.setFailed(error && error.toString());
   }
 }
 
