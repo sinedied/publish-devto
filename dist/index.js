@@ -3286,7 +3286,7 @@ async function commitAndPushUpdatedArticles(
 ) {
   try {
     // TODO: check if master branch
-    const files = articles.map(a => a.file);
+    const files = articles.map(a => `"${a.file}"`);
     await git('add', files);
 
     let commitMessage = conventional
@@ -3298,7 +3298,7 @@ async function commitAndPushUpdatedArticles(
       .join('\n- ')}`;
     await git(
       'commit',
-      ['-m', commitMessage],
+      ['-m', `"${commitMessage}"`],
       ['-c', `user.name="${commitName}"`, '-c', `user.email="${commitEmail}"`]
     );
 
