@@ -2521,7 +2521,14 @@ async function run() {
     const useConventionalCommits = core.getInput('conventional_commits');
     core.setSecret(devtoKey);
     core.setSecret(githubToken);
-    core.debug(JSON.stringify({ filesGlob, devtoKey, githubToken, useConventionalCommits}));
+    core.debug(
+      JSON.stringify({
+        filesGlob,
+        devtoKey,
+        githubToken,
+        useConventionalCommits
+      })
+    );
 
     await publishArticles({
       filesGlob,
@@ -3263,6 +3270,7 @@ const { exec } = __webpack_require__(986);
 const { convertPathToPosix } = __webpack_require__(345);
 
 const commitTitle = `Update published articles`;
+const commitAuthor = `dev.to bot <sinedied+devtobot@gmail.com>`;
 const git = (command, args) => exec('git', [command, ...args]);
 
 const getRepositoryUrl = (repository, githubToken) =>
@@ -3285,7 +3293,7 @@ async function commitAndPushUpdatedArticles(
     commitMessage += `\n\n- ${files
       .map(f => convertPathToPosix(f))
       .join('\n- ')}`;
-    await git('commit', ['-m', commitMessage]);
+    await git('commit', ['-m', commitMessage, '--author', commitAuthor]);
 
     await git('push', [
       getRepositoryUrl(repository, githubToken),
@@ -16510,7 +16518,7 @@ async function publishArticles(options) {
     const articles = await getArticlesFromFiles(options.filesGlob);
 
     console.info(chalk`Found {green ${articles.length}} article(s)`);
-    console.info('Publishing articles publication on dev.to, please wait…');
+    console.info('Publishing articles on dev.to, please wait…');
 
     // TODO: throttle
     await Promise.all(

@@ -14,7 +14,7 @@ async function publishArticles(options) {
     const articles = await getArticlesFromFiles(options.filesGlob);
 
     console.info(chalk`Found {green ${articles.length}} article(s)`);
-    console.info('Publishing articles publication on dev.to, please wait…');
+    console.info('Publishing articles on dev.to, please wait…');
 
     // TODO: throttle
     await Promise.all(
