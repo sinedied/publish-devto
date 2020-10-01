@@ -35,7 +35,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.2.3",
+    "@actions/core": "^1.2.6",
     "@actions/exec": "^1.0.3",
     "chalk": "^3.0.0",
     "fs-extra": "^9.0.0",
