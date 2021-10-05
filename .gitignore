@@ -6,3 +6,5 @@ coverage/
 *.tgz
 .DS_Store
 Thumbs.db
+TODO
+test/
