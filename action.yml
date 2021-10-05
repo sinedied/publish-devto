@@ -5,7 +5,8 @@ branding:
   icon: 'upload'
   color: 'gray-dark'
 runs:
-  using: 'node14'
+  using: 'docker'
+  image: 'Dockerfile'
   main: 'dist/index.js'
 inputs:
   devto_key:
