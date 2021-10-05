@@ -7,7 +7,6 @@ branding:
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  main: 'dist/index.js'
 inputs:
   devto_key:
     description: 'Your dev.to personal API key to publish and update articles'
