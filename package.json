@@ -41,7 +41,7 @@
     "@sinedied/devto-cli": "^1.0.3"
   },
   "devDependencies": {
-    "@zeit/ncc": "^0.22.0",
+    "@vercel/ncc": "^0.31.1",
     "xo": "^0.45.0"
   },
   "xo": {
