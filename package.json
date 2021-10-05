@@ -2,12 +2,13 @@
   "name": "publish-devto",
   "version": "1.0.0",
   "description": "GitHub Action to publish markdown files as articles on on dev.to platform, with assets hosted on GitHub.",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/sinedied/publish-devto.git"
   },
   "private": true,
-  "main": "dist/index.js",
+  "exports": "./dist/index.js",
   "scripts": {
     "lint": "xo",
     "lint:fix": "xo --fix",
@@ -36,40 +37,26 @@
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.2.6",
-    "@actions/exec": "^1.0.3"
+    "@actions/exec": "^1.0.3",
+    "@sinedied/devto-cli": "^1.0.3"
   },
   "devDependencies": {
     "@zeit/ncc": "^0.22.0",
-    "xo": "^0.28.1"
+    "xo": "^0.45.0"
   },
   "xo": {
     "space": true,
     "prettier": true,
     "envs": [
-      "node",
-      "jest"
-    ],
-    "rules": {
-      "camelcase": [
-        "error",
-        {
-          "allow": [
-            "body_markdown",
-            "cover_image",
-            "published_at"
-          ]
-        }
-      ]
-    },
-    "ignores": [
-      "test/mocks/**/*"
+      "node"
     ]
   },
   "prettier": {
+    "trailingComma": "none",
     "bracketSpacing": true
   },
   "engines": {
-    "node": "^12.20.0 || ^14.13.1 || >=16.0.0",
+    "node": "^14.13.1 || >=16.0.0",
     "npm": ">=6.0.0"
   }
 }
