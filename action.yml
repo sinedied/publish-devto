@@ -1,11 +1,11 @@
 name: 'Publish to dev.to'
-description: 'Publish markdown files to dev.to platform, using assets hosted on GitHub.'
+description: 'Publish markdown files as articles to dev.to platform, using assets hosted on GitHub.'
 author: 'sinedied'
 branding:
   icon: 'upload'
   color: 'gray-dark'
 runs:
-  using: 'node12'
+  using: 'node14'
   main: 'dist/index.js'
 inputs:
   devto_key:
@@ -18,6 +18,10 @@ inputs:
     description: 'One or more glob patterns of files to include'
     required: false
     default: 'posts/**/*.md'
+  branch:
+    description: 'The git branch to use'
+    required: false
+    default: 'main'
   conventional_commits:
     description: 'Use conventional commits messages'
     required: false
