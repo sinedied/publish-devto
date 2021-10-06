@@ -12,9 +12,10 @@
   "scripts": {
     "lint": "xo",
     "lint:fix": "xo --fix",
-    "build": "ncc build index.js --minify",
+    "build": "rm -rf dist && node scripts/build.js",
     "test": "xo",
-    "release": "git tag -d v2 && git push --delete origin v2 && git tag -a v2 -m 'v2' && git push --tags"
+    "tag": "git tag -d v2 && git push --delete origin v2 && git tag -a v2 -m 'v2' && git push --tags",
+    "release": "npm run -s build && npm run -s tag"
   },
   "keywords": [
     "github",
