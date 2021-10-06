@@ -8,7 +8,32 @@
 
 ## Usage
 
-See [this template repository](https://github.com/sinedied/devto-github-template) for usage and setup.
+See [action.yml](action.yml).
+
+```yaml
+steps:
+- uses: actions/checkout@v2
+- name: Publish articles on dev.to
+  uses: sinedied/publish-devto@v2
+  with:
+    # Your dev.to personal API key to publish and update articles.
+    # See https://docs.dev.to/api/#section/Authentication/api_key
+    devto_key: ${{ secrets.DEVTO_TOKEN }}
+    # Your GitHub personal access token, used to create commits for updated files.
+    # If you have a protected branch, you need to use a personal access token
+    # with the 'repo' permission.
+    # See https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
+    github_token: ${{ secrets.GITHUB_TOKEN }}
+    # (Optional) The files to publish. Default is "posts/**/*.md"
+    files: 'posts/**/*.md'
+    # (Optional) The git branch to use. Default is 'main'.
+    branch: main
+    # (Optional) Use conventional commit messages. Default is false.
+    # See https://www.conventionalcommits.org. 
+    conventional_commits: true
+```
+
+You can use [this template repository](https://github.com/sinedied/devto-github-template) as an example setup.
 
 ## How does it work?
 
