@@ -35,6 +35,15 @@ steps:
 
 You can use [this template repository](https://github.com/sinedied/devto-github-template) as an example setup.
 
+## Using a custom committer
+
+You can specify who you want to appear in the commits made by this action by adding these environment variables to the action:
+```yaml
+  env:
+    GIT_COMMITTER_NAME: your_name
+    GIT_COMMITTER_EMAIL: your@email.com
+````
+
 ## How does it work?
 
 This github action delegates most of the work to the [devto-cli](https://github.com/sinedied/devto-cli) push command.
