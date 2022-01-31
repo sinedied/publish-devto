@@ -26,3 +26,7 @@ inputs:
     description: 'Use conventional commits messages'
     required: false
     default: false
+  dry_run:
+    description: 'Do not make actual changes on dev.to'
+    required: false
+    default: false

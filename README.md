@@ -31,6 +31,8 @@ steps:
     # (Optional) Use conventional commit messages. Default is false.
     # See https://www.conventionalcommits.org. 
     conventional_commits: true
+    # (Optional) Do not make actual changes on dev.to.
+    dry_run: false
 ```
 
 You can use [this template repository](https://github.com/sinedied/devto-github-template) as an example setup.
