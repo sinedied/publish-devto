@@ -40,7 +40,8 @@
   "dependencies": {
     "@actions/core": "^1.2.6",
     "@actions/exec": "^1.0.3",
-    "@sinedied/devto-cli": "^1.1.0"
+    "@sinedied/devto-cli": "^1.1.0",
+    "table": "^6.8.0"
   },
   "devDependencies": {
     "@vercel/ncc": "^0.31.1",
@@ -55,7 +56,8 @@
   },
   "prettier": {
     "trailingComma": "none",
-    "bracketSpacing": true
+    "bracketSpacing": true,
+    "endOfLine": "auto"
   },
   "engines": {
     "node": "^14.13.1 || >=16.0.0",
