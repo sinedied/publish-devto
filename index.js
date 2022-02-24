@@ -34,18 +34,19 @@ async function run() {
       dryRun
     });
 
-    core.setOutput('result_json', JSON.stringify(output));
-    core.setOutput(
-      'result_summary_table_json',
-      JSON.stringify({
-        content: showResultsTable(output)
-      })
-    );
+    const json = JSON.stringify(output, null, 2);
+    core.debug('Output result_json:\n' + json);
+    core.setOutput('result_json', json);
+
+    const table = showResultsTable(output);
+    core.debug('Output result_table:\n' + table);
+    core.setOutput('result_table', table);
   } catch (error) {
     core.setFailed(error.toString());
   }
 }
 
+// TODO: export from CLI
 function showResultsTable(results) {
   const rows = results.map((r) => [r.status, r.publishedStatus, r.title]);
   const usedWidth = 27; // Status columns + padding
