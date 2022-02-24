@@ -40,8 +40,7 @@
   "dependencies": {
     "@actions/core": "^1.2.6",
     "@actions/exec": "^1.0.3",
-    "@sinedied/devto-cli": "^1.1.0",
-    "table": "^6.8.0",
+    "@sinedied/devto-cli": "^1.2.0",
     "xo": "^0.48.0"
   },
   "devDependencies": {
