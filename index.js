@@ -1,5 +1,4 @@
 import core from '@actions/core';
-import { table, getBorderCharacters } from 'table';
 import { formatErrors, formatResultsTable } from '@sinedied/devto-cli';
 import { publishArticles } from './lib/publish.js';
 
@@ -51,6 +50,7 @@ async function run() {
     if (errors) {
       summary += errors + '\n';
     }
+
     summary += formatResultsTable(results);
     core.debug('Output result_summary:\n' + summary);
     core.setOutput('result_summary', summary);
