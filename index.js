@@ -46,7 +46,7 @@ async function run() {
     core.debug('Output result_json:\n' + json);
     core.setOutput('result_json', json);
 
-    let summary = `Found ${results.length}} article(s)\n`;
+    let summary = `Found ${results.length} article(s)\n`;
     const errors = formatErrors(results);
     if (errors) {
       summary += errors + '\n';
