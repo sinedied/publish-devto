@@ -41,11 +41,11 @@
     "@actions/core": "^1.2.6",
     "@actions/exec": "^1.0.3",
     "@sinedied/devto-cli": "^1.1.0",
-    "table": "^6.8.0"
+    "table": "^6.8.0",
+    "xo": "^0.48.0"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.31.1",
-    "xo": "^0.45.0"
+    "@vercel/ncc": "^0.33.3"
   },
   "xo": {
     "space": true,
@@ -56,8 +56,7 @@
   },
   "prettier": {
     "trailingComma": "none",
-    "bracketSpacing": true,
-    "endOfLine": "auto"
+    "bracketSpacing": true
   },
   "engines": {
     "node": "^14.13.1 || >=16.0.0",
