@@ -5,8 +5,8 @@ branding:
   icon: 'upload'
   color: 'gray-dark'
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: 'node16'
+  main: 'dist/index.js'
 inputs:
   devto_key:
     description: 'Your dev.to personal API key to publish and update articles'
