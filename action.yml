@@ -33,5 +33,5 @@ inputs:
 outputs:
   result_json:
     description: 'Publish result as a JSON string'
-  result_table:
-    description: 'Publish result formatted as a table'
+  result_summary:
+    description: 'Publish result summary formatted as text'

@@ -1,5 +1,6 @@
 import core from '@actions/core';
 import { table, getBorderCharacters } from 'table';
+import { formatErrors, formatResultsTable } from '@sinedied/devto-cli';
 import { publishArticles } from './lib/publish.js';
 
 async function run() {
@@ -25,7 +26,7 @@ async function run() {
       })
     );
 
-    const output = await publishArticles({
+    const results = await publishArticles({
       filesGlob,
       devtoKey,
       githubToken,
@@ -34,31 +35,25 @@ async function run() {
       dryRun
     });
 
+    const output = results.map((r) => ({
+      id: r.article.data.id,
+      title: r.article.data.title,
+      status: r.status,
+      publishedStatus: r.publishedStatus,
+      errors: r.errors
+    }));
     const json = JSON.stringify(output, null, 2);
     core.debug('Output result_json:\n' + json);
     core.setOutput('result_json', json);
 
-    const table = showResultsTable(output);
-    core.debug('Output result_table:\n' + table);
-    core.setOutput('result_table', table);
+    let summary = `Found ${results.length}} article(s)\n`;
+    summary += formatErrors(results) + '\n';
+    summary += formatResultsTable(results);
+    core.debug('Output result_summary:\n' + summary);
+    core.setOutput('result_summary', summary);
   } catch (error) {
     core.setFailed(error.toString());
   }
-}
-
-// TODO: export from CLI
-function showResultsTable(results) {
-  const rows = results.map((r) => [r.status, r.publishedStatus, r.title]);
-  const usedWidth = 27; // Status columns + padding
-  const availableWidth = 80;
-  const maxTitleWidth = Math.max(availableWidth - usedWidth, 8);
-
-  return table(rows, {
-    drawHorizontalLine: () => false,
-    border: getBorderCharacters('void'),
-    columnDefault: { paddingLeft: 0, paddingRight: 1 },
-    columns: { 2: { truncate: maxTitleWidth, width: maxTitleWidth } }
-  }).slice(0, -1);
 }
 
 run();
