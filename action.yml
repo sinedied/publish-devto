@@ -32,6 +32,6 @@ inputs:
     default: false
 outputs:
   result_json:
-    description: 'Result as a json string'
-  result_summary_table_json:
-    description: 'Summary of actions formatted as a table'
+    description: 'Publish result as a JSON string'
+  result_table:
+    description: 'Publish result formatted as a table'
