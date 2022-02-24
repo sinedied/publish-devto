@@ -26,3 +26,12 @@ inputs:
     description: 'Use conventional commits messages'
     required: false
     default: false
+  dry_run:
+    description: 'Do not make actual changes on dev.to'
+    required: false
+    default: false
+outputs:
+  result_json:
+    description: 'Result as a json string'
+  result_summary_table_json:
+    description: 'Summary of actions formatted as a table'

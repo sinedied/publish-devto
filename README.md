@@ -31,6 +31,8 @@ steps:
     # (Optional) Use conventional commit messages. Default is false.
     # See https://www.conventionalcommits.org. 
     conventional_commits: true
+    # (Optional) Do not make actual changes on dev.to.
+    dry_run: false
 ```
 
 You can use [this template repository](https://github.com/sinedied/devto-github-template) as an example setup.
@@ -38,6 +40,7 @@ You can use [this template repository](https://github.com/sinedied/devto-github-
 ## Using a custom committer
 
 You can specify who you want to appear in the commits made by this action by adding these environment variables to the action:
+
 ```yaml
   env:
     GIT_COMMITTER_NAME: your_name
