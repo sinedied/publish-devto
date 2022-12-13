@@ -1,0 +1,7 @@
+- tests
+- check if need to update before POST/PUT
+- reconcile (load all devto article then check title)
+- rate limit: there is a limit of 10 articles created each 30 seconds by the same user.
+- template + .editorconfig
+- typescript
+- https://www.npmjs.com/package/conventional-commits-detector
