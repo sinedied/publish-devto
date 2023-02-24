@@ -45,7 +45,7 @@ You can specify who you want to appear in the commits made by this action by add
   env:
     GIT_COMMITTER_NAME: your_name
     GIT_COMMITTER_EMAIL: your@email.com
-````
+```
 
 ## How does it work?
 
