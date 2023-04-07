@@ -41,7 +41,7 @@
     "@actions/core": "^1.9.1",
     "@actions/exec": "^1.0.3",
     "@sinedied/devto-cli": "^1.2.0",
-    "xo": "^0.48.0"
+    "xo": "^0.54.0"
   },
   "devDependencies": {
     "@vercel/ncc": "^0.33.3"
@@ -51,7 +51,10 @@
     "prettier": true,
     "envs": [
       "node"
-    ]
+    ],
+    "rules": {
+      "unicorn/prefer-top-level-await": "off"
+    }
   },
   "prettier": {
     "trailingComma": "none",
