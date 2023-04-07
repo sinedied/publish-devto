@@ -51,7 +51,10 @@ async function run() {
       summary += errors + '\n';
     }
 
-    summary += formatResultsTable(results);
+    if (results.length > 0) {
+      summary += formatResultsTable(results);
+    }
+
     core.debug('Output result_summary:\n' + summary);
     core.setOutput('result_summary', summary);
   } catch (error) {
