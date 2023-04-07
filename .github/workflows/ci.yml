@@ -30,6 +30,7 @@ jobs:
 
     - name: npm install and test
       run: |
+        npm i -g npm@latest
         npm ci
         npm test
       env:
