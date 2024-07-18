@@ -41,10 +41,10 @@
     "@actions/core": "^1.9.1",
     "@actions/exec": "^1.0.3",
     "@sinedied/devto-cli": "^1.2.0",
-    "xo": "^0.54.0"
+    "xo": "^0.58.0"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.36.1"
+    "@vercel/ncc": "^0.38.1"
   },
   "xo": {
     "space": true,
