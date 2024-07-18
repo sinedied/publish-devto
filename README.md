@@ -12,7 +12,7 @@ See [action.yml](action.yml).
 
 ```yaml
 steps:
-- uses: actions/checkout@v2
+- uses: actions/checkout@v4
 - name: Publish articles on dev.to
   uses: sinedied/publish-devto@v2
   with:
