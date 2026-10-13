@@ -12,18 +12,20 @@ See [action.yml](action.yml).
 
 ```yaml
 steps:
-- uses: actions/checkout@v4
+- uses: actions/checkout@v7
 - name: Publish articles on dev.to
   uses: sinedied/publish-devto@v2
   with:
     # Your dev.to personal API key to publish and update articles.
     # See https://docs.dev.to/api/#section/Authentication/api_key
     devto_key: ${{ secrets.DEVTO_TOKEN }}
-    # Your GitHub personal access token, used to create commits for updated files.
-    # If you have a protected branch, you need to use a personal access token
-    # with the 'repo' permission.
+    # Your GitHub token, used to create commits for updated files.
+    # For a personal access token, create a secret named GH_TOKEN because
+    # custom secret names cannot start with GITHUB_.
+    # The built-in secrets.GITHUB_TOKEN can also be used when it has
+    # contents: write permission and branch protection rules allow it.
     # See https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
-    github_token: ${{ secrets.GITHUB_TOKEN }}
+    github_token: ${{ secrets.GH_TOKEN }}
     # (Optional) The files to publish. Default is "posts/**/*.md"
     files: 'posts/**/*.md'
     # (Optional) The git branch to use. Default is 'main'.
