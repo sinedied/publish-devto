@@ -1,0 +1,106 @@
+name: release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Immutable v2.x.y version to release"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-v2
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Require main branch
+        if: github.ref != 'refs/heads/main'
+        run: |
+          echo "::error::Releases must be dispatched from the main branch."
+          exit 1
+
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: Validate release
+        id: release
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          if [[ ! "$VERSION" =~ ^v2\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::Version must match v2.x.y (for example, v2.1.0)."
+            exit 1
+          fi
+
+          node --input-type=module <<'EOF'
+          import { readFileSync } from 'node:fs';
+
+          const action = readFileSync('action.yml', 'utf8');
+          if (!/^\s*using:\s*['"]?node24['"]?\s*$/m.test(action)) {
+            console.error('::error::action.yml must declare runs.using as node24.');
+            process.exit(1);
+          }
+          EOF
+
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Install, test, and build
+        run: |
+          npm ci
+          npm test
+          npm run build
+          git diff --exit-code -- dist
+
+      - name: Create immutable version tag
+        env:
+          VERSION: ${{ steps.release.outputs.version }}
+        run: |
+          existing_tag="$(git ls-remote --tags origin "refs/tags/$VERSION" | cut -f1)"
+          if [[ -n "$existing_tag" ]]; then
+            git fetch origin "refs/tags/$VERSION:refs/releases/$VERSION"
+            existing_commit="$(git rev-list -n 1 "refs/releases/$VERSION")"
+            if [[ "$existing_commit" != "$GITHUB_SHA" ]]; then
+              echo "::error::$VERSION already exists at $existing_commit and cannot be overwritten."
+              exit 1
+            fi
+
+            echo "$VERSION already points to $GITHUB_SHA; continuing the interrupted release."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git tag -a "$VERSION" "$GITHUB_SHA" -m "$VERSION"
+            git push origin "refs/tags/$VERSION"
+          fi
+
+      - name: Create or update GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.release.outputs.version }}
+        run: |
+          if gh release view "$VERSION" >/dev/null 2>&1; then
+            gh release edit "$VERSION" --title "$VERSION" --latest
+          else
+            gh release create "$VERSION" --verify-tag --generate-notes --title "$VERSION" --latest
+          fi
+
+      - name: Update floating v2 tag
+        env:
+          VERSION: ${{ steps.release.outputs.version }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -f -a v2 "$GITHUB_SHA" -m "v2 ($VERSION)"
+          git push --force origin refs/tags/v2

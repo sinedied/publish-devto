@@ -54,3 +54,13 @@ You can specify who you want to appear in the commits made by this action by add
 This github action delegates most of the work to the [devto-cli](https://github.com/sinedied/devto-cli) push command.
 
 You can find more information about how it works in the [CLI readme](https://github.com/sinedied/devto-cli).
+
+## Releasing (maintainers)
+
+1. Merge the release commit to `main` and confirm the build workflow passes.
+2. Run the **release** workflow from `main` and enter a new version matching `v2.x.y`.
+3. Confirm that the immutable version tag, GitHub Release, and floating `v2` tag point to the intended commit.
+
+The workflow verifies that `action.yml` uses the Node 24 runtime and that rebuilding `dist` produces no changes. It creates the immutable `v2.x.y` tag without replacing an existing tag, creates or updates its GitHub Release, and only then moves the `v2` alias without deleting it first. A failed workflow can be rerun with the same version only when that tag already points to the same commit.
+
+Consumers should use `sinedied/publish-devto@v2` for automatic compatible updates or pin an immutable `v2.x.y` tag for reproducibility. Do not use `main` as a stable reference: it can contain changes that have not completed the release checks.
